@@ -78,12 +78,17 @@ class ImageHostingHandler(BaseHTTPRequestHandler):
             logger.error('Payload Too Large')
             self.send_response(413, 'Payload Too Large')
             return
-
+        logger.info(f'Before cgi')
+        logger.info(f'POST {self.path}')
+        logger.info(f'self.rfile: {self.rfile}')
+        logger.info(f'self.headers: {self.headers}')
         form = cgi.FieldStorage(
             fp=self.rfile,
             headers=self.headers,
             environ={'REQUEST_METHOD': 'POST'}
         )
+        logger.info(f'After cgi')
+        logger.info(f'form: {form}')
         data = form['image'].file
 
         _, ext = os.path.splitext(form['image'].filename)
@@ -95,8 +100,10 @@ class ImageHostingHandler(BaseHTTPRequestHandler):
 
         image_id = uuid.uuid4()
         image_name = f'{image_id}{ext}'
+        logger.info(f'Before with open')
         with open(f'{UPLOAD_DIR}/{image_name}', 'wb') as f:
             f.write(data.read())
+        logger.info(f'After with open')
 
         try:
             im = Image.open(f'{UPLOAD_DIR}/{image_name}')
