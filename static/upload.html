@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload</title>
+    <title>Загрузка</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
 
-<h2>File Upload</h2>
+<h2>Загрузка картинки</h2>
 <form method="POST" enctype="multipart/form-data" id="file-upload-form" class="uploader" action="/upload">
     <input id="file-upload" type="file" name="image" accept=".jpeg,.png,.gif,.jpg" />
     <label for="file-upload" id="file-drag">
         <img id="file-image" src="#" alt="Preview" class="hidden">
         <div id="start">
             <i class="fa fa-download" aria-hidden="true"></i>
-            <div>Select a file or drag here</div>
-            <div id="notimage" class="hidden">Please select an image</div>
-            <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+            <div>Выберите картинку или перетащите сюда</div>
+            <div id="notimage" class="hidden">Выберите картинку</div>
+            <span id="file-upload-btn" class="btn btn-primary">Выбрать картинку</span>
         </div>
         <div id="response" class="hidden">
             <div id="messages"></div>
@@ -26,12 +26,6 @@
         </div>
     </label>
 </form>
-
-<!--<form method="POST" enctype="multipart/form-data" action="/upload">-->
-<!--    <input type="file" id="file-upload" name="image" accept=".jpeg,.png,.gif,.jpg">-->
-<!--    <label for="file-upload">Выберите файл</label>-->
-<!--    <button type="submit">Загрузить</button>-->
-<!--</form>-->
 </body>
 <script src="upload.js"></script>
 </html>
