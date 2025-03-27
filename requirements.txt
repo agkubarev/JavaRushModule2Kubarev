@@ -1,2 +1,4 @@
 loguru
 pillow
+psycopg[binary]
+dotenv

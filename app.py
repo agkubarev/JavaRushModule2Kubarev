@@ -9,6 +9,8 @@ from os.path import isfile, join
 from PIL import Image
 
 from loguru import logger
+from db.DBManager import DBManager
+from dotenv import load_dotenv
 
 SERVER_ADDRESS = ('0.0.0.0', 8000)
 ALLOWED_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
@@ -120,6 +122,15 @@ class ImageHostingHandler(BaseHTTPRequestHandler):
 
 
 def run():
+    load_dotenv()
+    db = DBManager(os.getenv('POSTGRES_DB'),
+                   os.getenv('POSTGRES_USER'),
+                   os.getenv('POSTGRES_PASSWORD'),
+                   os.getenv('POSTGRES_HOST'),
+                   os.getenv('POSTGRES_PORT'))
+    db.load_init_data()
+    logger.info(db.get_images())
+    db.execute("DROP TABLE IF EXISTS images")
     # noinspection PyTypeChecker
     httpd = HTTPServer(SERVER_ADDRESS, ImageHostingHandler)
     # noinspection PyBroadException
