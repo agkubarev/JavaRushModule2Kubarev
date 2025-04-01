@@ -10,9 +10,10 @@ COPY app.py .
 COPY static/upload.html upload.html
 COPY static/style.css style.css
 COPY static/upload.js upload.js
-COPY db/queries/init_data.sql db/queries/init_data.sql
+COPY db/queries/init_tables.sql db/queries/init_tables.sql
 COPY db/DBManager.py db/DBManager.py
 COPY ImageHostingHandler.py ImageHostingHandler.py
+COPY settings.py settings.py
 
 EXPOSE 8000
 
